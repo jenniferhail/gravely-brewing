@@ -1,0 +1,242 @@
+.layout.hero {
+	position: relative;
+    overflow: hidden;
+	padding: 0;
+	margin-left: $site-padding / 2;
+	margin-right: $site-padding / 2;
+	@media screen and ($tablet) {
+		margin-left: $site-padding;
+		margin-right: $site-padding;
+	}
+	.content {
+		position: relative;
+        height: calc(100vh - 140px);
+		max-width: 1400px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+	.background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+	.hero-link {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+	}
+	.buttons {
+		display: flex;
+		justify-content: center;
+		position: relative;
+		top: 43%;
+		padding-top: 0;
+		transform: translateY(-50%);
+		z-index: 2;
+	}
+	.btn {
+		margin: 12px;
+		color: $white;
+		border: 0;
+		background-color: $orange-fade;
+		@media screen and ($mobile-sm) {
+			max-width: 260px;
+			font-size: 24px;
+		}
+		.label {
+			color: $white;
+		}
+		.btn-fill {
+			display: none;
+		}
+		&:after {
+		    content: '';
+		    position: absolute;
+			top: -12px;
+			left: -12px;
+			right: -12px;
+			bottom: -12px;
+			border: 3px solid $orange-fade;
+			transition: top 200ms $base-timing,
+						left 200ms $base-timing,
+						right 200ms $base-timing,
+						bottom 200ms $base-timing,
+						border 200ms $base-timing;
+		}
+		&:hover:after {
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			border: 3px solid $clear;
+			transition: top 200ms $base-timing,
+						left 200ms $base-timing,
+						right 200ms $base-timing,
+						bottom 200ms $base-timing,
+						border 200ms $base-timing;
+		}
+	}
+}
+.layout.hero.stack {
+	margin-bottom: -100px;
+	text-align: center;
+}
+.layout.hero.featured {
+    position: relative;
+    overflow: hidden;
+	margin-left: $site-padding;
+	margin-right: $site-padding;
+    // @media screen and (max-width: 690px) {
+	@media screen and (max-width: 767px) {
+        height: calc(100vh - 150px);
+        width: calc(100% - 60px);
+        padding: 0;
+        // margin: 0;
+		margin-left: $site-padding / 2;
+		margin-right: $site-padding / 2;
+        margin-bottom: 40px;
+        background-image: url('../img/mobile-hero.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .content {
+        height: calc(100vh - 140px);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        @media screen and (max-width: 767px) {
+            display: none;
+        }
+
+		// Display background images
+		.active {
+			opacity: 1;
+            transition: all 300ms ease-in-out;
+		}
+
+        // Slide One
+        .background-beer {
+            background-image: url('../img/hero-background-1.png');
+        }
+        .foreground-beer {
+            left: 0px;
+            background-image: url('../img/hero-foreground-1-new.png');
+        }
+
+        // Slide Two
+        .background-music {
+            background-image: url('../img/hero-background-2.png');
+        }
+        .foreground-music {
+            right: 100px;
+            background-image: url('../img/hero-foreground-2.png');
+        }
+
+        // Slide Three
+        .background-food {
+            background-image: url('../img/hero-background-3.png');
+        }
+        .foreground-food {
+            right: 300px;
+            background-image: url('../img/hero-foreground-3.png');
+        }
+
+    }
+    .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: all 300ms ease-in-out;
+    }
+    .center-piece {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 120%;
+        height: 120%;
+        max-width: 900px;
+        max-height: 900px;
+        margin: auto;
+        opacity: 1;
+        transform: rotate(0deg);
+        background-image: url('../img/hero-center.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        @media screen and (max-width: 680px){
+            width: 100%;
+            height: 100%;
+        }
+        &.spinning {
+            transition: transform 900ms ease-in-out;
+            transform: rotate(360deg);
+        }
+    }
+    .foreground {
+        position: absolute;
+        bottom: 0;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+		opacity: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: all 300ms ease-in-out;
+    }
+    .g {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 120%;
+        height: 120%;
+        max-width: 900px;
+        max-height: 900px;
+        margin: auto;
+        background-image: url('../img/g.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: all 300ms ease-in-out;
+        @media screen and (max-width: 680px){
+            width: 90%;
+            height: 90%;
+        }
+    }
+}
+.layout.hero.map {
+	.content {
+		height: 600px;
+	}
+	.background {
+		height: 100%;
+	}
+	.hero-link {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+	}
+}

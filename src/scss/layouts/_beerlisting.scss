@@ -1,0 +1,65 @@
+.layout.beerlisting {
+    position: relative;
+    z-index: 10;
+    min-height: 700px;
+    @media screen and (min-width: 980px) {
+        overflow-x: hidden;
+        margin-bottom: 40px;
+    }
+    @media screen and (max-width: 980px) {
+        min-height: auto;
+    }
+    @media screen and (max-width: 680px) {
+        margin-bottom: 130px;
+    }
+    .wrapper {
+        @media screen and (min-width: 980px) {
+            padding-bottom: 225px;
+        }
+        @media screen and (min-width: 1200px) {
+            padding-bottom: 300px;
+        }
+    }
+	.wrapper,
+	.content {
+		position: relative;
+		// overflow: hidden;
+	}
+
+	.content {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		transition: transform 900ms ease-in-out;
+        @media screen and (min-width: 980px) {
+            overflow-y: visible;
+        }
+		&.move {
+
+		}
+	}
+	.title {
+		color: white;
+		cursor: pointer;
+	}
+	.image {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		max-width: 420px;
+        max-height: 520px;
+		height: 100%;
+		margin-left: 40px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        z-index: 10;
+        @media screen and (max-width: 980px) {
+            display: none;
+        }
+        img {
+            max-width: 90%;
+        }
+	}
+}

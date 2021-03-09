@@ -1,0 +1,77 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+// Breakpoints
+$mobile-xs: "min-width: 380px";
+$mobile-sm: "min-width: 480px";
+$mobile-lg: "min-width: 640px";
+$tablet: "min-width: 768px";
+$sm-laptop: "min-width: 1000px";
+$laptop: "min-width: 1260px";
+$desktop: "min-width: 1400px";
+
+$hide-mobile-menu: "min-width: 501px";
+$hide-tagline: "min-width: 900px";
+$long-menu: "min-width: 768px";
+// $long-menu: $tablet;
+
+// Typography
+$base-font-family: 'Abel', sans-serif;
+$heading-font-family: 'Montserrat', sans-serif;
+
+// Line height
+$base-line-height: 1.8;
+$heading-line-height: 1.2;
+
+// Font Weight
+$base-font-weight: 300;
+$heading-font-weight: 700;
+
+// Other Sizes
+$max-width: 1400px;
+$site-padding: 60px;
+$site-width: $max-width + ($site-padding * 2);
+$base-border-radius: 0;
+$base-spacing: 1.5em;
+$small-spacing: $base-spacing / 2;
+$base-z-index: 0;
+
+// Colors
+$clear: rgba(0,0,0,0);
+$white: #ffffff;
+$blue: #1565c0;
+$dark-blue: #28282b;
+
+$dark-gray: #181214;
+$medium-gray: #999;
+$light-gray: #ddd;
+
+$black: #28272C;
+
+$orange: #E48D3B;
+$orange-fade: rgba(228, 140, 58, 0.9);
+$pink: #D80D8D;
+
+// Font Colors
+$base-font-color: $medium-gray;
+$action-color: $orange;
+
+// Border
+$base-border-color: $medium-gray;
+$base-border: 1px solid $base-border-color;
+
+// Background Colors
+$viewport-background-color: $white;
+// $shadow: 0 40px 60px #d3d3d3;
+$shadow: 0px 25px 30px -20px #bbbbbb;
+
+// Focus
+$focus-outline-color: transparentize($action-color, 0.4);
+$focus-outline-width: 0;
+$focus-outline: $focus-outline-width solid $focus-outline-color;
+$focus-outline-offset: 2px;
+
+// Animations
+$base-duration: 300ms;
+$base-timing: ease-in-out;

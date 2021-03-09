@@ -1,0 +1,237 @@
+$burger-size: 54px;
+$burger-line: 30px;
+
+.mobile-nav {
+	position: absolute;
+	top: 15px;
+	right: 18px;
+    @media screen and ($hide-mobile-menu) {
+        display: none;
+    }
+    // Hide the mobile menu links until the hamburger is clicked
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        padding: 100px 30px 50px;
+        background: $white;
+        list-style-type: none;
+        -webkit-font-smoothing: antialiased;
+        text-align: center;
+        overflow: auto;
+        transform-origin: 0 0;
+        transform: translate(100%);
+        transition: transform 500ms cubic-bezier(0.77, 0.2, 0.05, 1);
+        z-index: -1;
+        > * {
+            margin-bottom: 25px;
+            font-size: 24px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        &.slide {
+            transform: translate(0);
+
+            > * {
+                opacity: 1;
+                transform: translate(0);
+
+                $first-li: 400ms;
+                $second-li: 500ms;
+                $third-li: 600ms;
+                $fourth-li: 700ms;
+                $fifth-li: 800ms;
+                $sixth-li: 900ms;
+				$seventh-li: 1000ms;
+
+                &:nth-child(1) {
+                  -webkit-transition-delay: $first-li;
+                          transition-delay: $first-li;
+                }
+
+                &:nth-child(2) {
+                  -webkit-transition-delay: $second-li;
+                          transition-delay: $second-li;
+                }
+
+                &:nth-child(3) {
+                  -webkit-transition-delay: $third-li;
+                          transition-delay: $third-li;
+                }
+
+                &:nth-child(4) {
+                  -webkit-transition-delay: $fourth-li;
+                          transition-delay: $fourth-li;
+                }
+
+                &:nth-child(5) {
+                  -webkit-transition-delay: $fifth-li;
+                          transition-delay: $fifth-li;
+                }
+
+                &:nth-child(6) {
+                  -webkit-transition-delay: $sixth-li;
+                          transition-delay: $sixth-li;
+                }
+
+				&:nth-child(7) {
+                  -webkit-transition-delay: $seventh-li;
+                          transition-delay: $seventh-li;
+                }
+
+            }
+
+        }
+    }
+    .hamburger {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        position: relative;
+        display: block;
+        width: $burger-size;
+        height: $burger-size;
+        background: $white;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        .top {
+            top: 0;
+            transform-origin: 27px 1px;
+        }
+        .mid {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .bot {
+            bottom: 0;
+            transform-origin: 27px 3px;
+        }
+        &.open {
+            .path {
+                animation: dash-in 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+            .animate-path {
+                animation: circle-in 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+            .top {
+                animation: close-top-out 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+            .mid {
+                animation: burger-fill-out 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+            .bot {
+                animation: close-bot-out 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+        }
+        &.closed {
+            .path {
+                animation: dash-out 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+            .animate-path {
+                animation: circle-out 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+            .top {
+                animation: close-top-in 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+            .mid {
+                animation: burger-fill-in 0.6s linear normal;
+            }
+            .bot {
+                animation: close-bot-in 0.6s linear normal;
+                animation-fill-mode: forwards;
+            }
+        }
+    }
+    .burger-main {
+        position: absolute;
+        padding: 16px 12px;
+        height: $burger-size;
+        width: $burger-size;
+        span {
+            position: absolute;
+            display: block;
+            height: 4px;
+            width: $burger-line;
+            border-radius: 2px;
+            background: $dark-gray;
+        }
+    }
+    .burger-inner {
+      position: relative;
+      height: 22px;
+      width: $burger-line;
+    }
+    .svg-main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $burger-size;
+      height: $burger-size;
+      overflow: hidden;
+    }
+    .circle {
+      width: $burger-size;
+      height: $burger-size;
+    }
+    .path {
+      stroke-dasharray: 240;
+      stroke-dashoffset: 240;
+      stroke-linejoin: round;
+    }
+    .path-burger {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: $burger-size;
+      width: $burger-size;
+      -webkit-mask: url(../img/burger-path.svg);
+      mask: url(../img/burger-path.svg);
+      -webkit-mask-box-image: url(../img/burger-path.svg);
+    }
+    .animate-path {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $burger-size;
+      height: $burger-size;
+    }
+    .path-rotation {
+      height: $burger-size / 2;
+      width: $burger-size / 2;
+      margin: $burger-size / 2 $burger-size / 2 0 0;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transform-origin: 100% 0;
+      transform-origin: 100% 0;
+        &:before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: $burger-size / 2;
+            margin: 0 4px 0 0;
+            background: $dark-gray;
+        }
+        .no-smil & {
+            &:before {
+                background: transparent;
+            }
+        }
+    }
+}

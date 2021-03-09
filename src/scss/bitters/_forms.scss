@@ -1,0 +1,463 @@
+$_form-background-color: #fff;
+$_form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
+$_form-box-shadow-focus: $_form-box-shadow, 0 0 5px rgba($action-color, 0.7);
+
+fieldset, .input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+    @media screen and (max-width: 680px){
+        flex-direction: column;
+    }
+    input[type="text"] {
+        flex-basis: 100%;
+    }
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: $small-spacing / 2;
+  padding: 0;
+}
+
+label {
+    display: inline-block;
+    width: 100%;
+    max-width: 40px;
+    font-weight: 600;
+	-webkit-font-smoothing: antialiased;
+    margin-bottom: $small-spacing / 2;
+    margin-right: $small-spacing * 2;
+    color: $black;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  font-family: $base-font-family;
+  font-size: 16px;
+}
+
+#{$all-text-inputs} {
+  appearance: none;
+  background-color: $_form-background-color;
+  border: none;
+  border-bottom: $base-border;
+  border-radius: $base-border-radius;
+  box-shadow: none;
+  box-sizing: border-box;
+  margin-bottom: $small-spacing;
+  padding: $base-spacing / 3;
+  transition: border-color $base-duration $base-timing;
+  width: 100%;
+  &+input[type='text'] {
+      margin-left: 30px;
+      @media screen and (max-width: 680px){
+          margin-left: 0px;
+      }
+  }
+
+  &:hover {
+    border-color: shade($base-border-color, 20%);
+  }
+
+  &:focus {
+    border-color: $action-color;
+    box-shadow: $_form-box-shadow-focus;
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: shade($_form-background-color, 5%);
+    cursor: not-allowed;
+
+    &:hover {
+      border: $base-border;
+    }
+  }
+
+  &::placeholder {
+    color: tint($base-font-color, 40%);
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+[type="checkbox"],
+[type="radio"] {
+	display: inline;
+	margin-right: $small-spacing / 2;
+	width: 0;
+	height: 0;
+	margin: 0;
+	opacity: 0;
+	li & {
+		position: relative;
+	}
+	&:focus {
+		border-color: $action-color;
+		border-radius: 50%;
+		box-shadow: $_form-box-shadow, 0 1px 5px 3px rgba($action-color, 0.7);
+		outline: none;
+	}
+	~ label {
+		display: block;
+		margin: 0 0 0 10px;
+		padding-left: 0;
+		white-space: nowrap; // IE fix for the contact form radio button labels
+		position: static;
+	}
+	~ label:before {
+		 content: '';
+		 position: absolute;
+		 top: 8px;
+		 left: 8px;
+		 width: 6px;
+		 height: 6px;
+		 border-radius: 50%;
+		 box-shadow: 0 0 0 1px $medium-gray;
+		 opacity: 0.6;
+		 transition: all 200ms $base-timing;
+	}
+}
+[type="checkbox"]:checked,
+[type="radio"]:checked {
+	~ label:before {
+		background-color: $orange;
+		box-shadow: 0 0 0 1px $orange;
+		opacity: 1;
+		transition: all 200ms $base-timing;
+	}
+}
+[type="checkbox"]:hover,
+[type="radio"]:hover {
+	~ label {
+		cursor: pointer;
+	}
+	~ label:before {
+		box-shadow: 0 0 0 1px $orange;
+		transition: all 200ms $base-timing;
+	}
+}
+
+[type="file"] {
+  margin-bottom: $small-spacing;
+  width: 100%;
+}
+
+select {
+  margin-bottom: $small-spacing;
+  width: 100%;
+}
+
+[type="checkbox"],
+[type="radio"],
+[type="file"],
+select {
+  &:focus {
+    outline: $focus-outline;
+    outline-offset: $focus-outline-offset;
+  }
+}
+
+// Style the extra buttons after the contact form submit
+.download-forms {
+	display: block;
+	padding-top: 15px;
+	@media screen and ($tablet) {
+		display: inline-block;
+		padding-top: 0;
+	}
+	li {
+		display: block;
+		padding-top: 15px;
+		@media screen and ($tablet) {
+			display: inline;
+			padding-top: 0;
+			padding-left: 30px;
+		}
+	}
+	i {
+		padding-right: 5px;
+	}
+}
+
+// Gravity Forms — Two Columns
+// Contact Form Styles
+#gform_2 {
+	&:after {
+		content: '';
+		display: block;
+		width: 100%;
+		clear: both;
+	}
+	.gform_heading {
+		@media screen and ($tablet) {
+			width: 38%;
+			margin-bottom: 0;
+		}
+	}
+	span.gform_description {
+		margin-bottom: 0;
+	}
+	textarea.small {
+		height: 32px;
+	}
+	// First question, on left
+	#field_2_1 {
+		.gfield_label {
+			max-width: 70px;
+			padding-right: 0;
+			margin-right: 0;
+			margin-bottom: 40px;
+			@media screen and ($tablet) {
+				width: 100%;
+				max-width: 100%;
+				padding-right: 16px;
+				margin-right: 1.5em;
+				margin-bottom: 5px;
+			}
+		}
+		.ginput_container.ginput_container_radio {
+			margin-left: 70px;
+			width: calc(100% - 70px);
+			@media screen and ($tablet) {
+				margin-left: 10px;
+			}
+		}
+	}
+
+}
+
+// Pop up disclaimer for the donate option
+.form-popup {
+    display: none;
+	max-width: 500px;
+	padding: 55px;
+	.title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	button.center {
+		margin: 30px auto 0;
+	}
+}
+
+body {
+	.gform_wrapper {
+		position: relative;
+		max-width: 900px;
+		margin: 0 auto;
+		.gform_heading,
+		.gform_footer  {
+			text-align: center;
+			@media screen and ($tablet) {
+				text-align: left;
+			}
+		}
+		h3.gform_title {
+			@extend .small-ass-heading;
+		}
+		.gfield_label {
+			float: left;
+			width: 29%;
+		}
+		&.gf_browser_chrome .gfield_checkbox li input[type=checkbox],
+		&.gf_browser_chrome .gfield_radio li input[type=radio],
+		&.gf_browser_chrome .gfield_checkbox li input {
+			margin-top: 0;
+		}
+		.gfield_required {
+			color: $orange;
+		}
+		@media screen and (min-width: 641px) {
+			.right_label input.large,
+			.right_label select.large,
+			.left_label input.large,
+			.left_label select.large,
+			.right_label textarea.small,
+			.left_label textarea.small,
+			.right_label textarea.medium,
+			.left_label textarea.medium,
+			.right_label textarea.large,
+			.left_label textarea.large {
+				width: 100%;
+			}
+			ul.gform_fields li.gfield {
+				padding-right: 0;
+			}
+		}
+		.gform_footer,
+		.gform_page_footer {
+			width: 100%;
+			margin-left: 0;
+		    margin-top: 50px;
+			.button,
+			input.button,
+			input[type=submit],
+			input:not([type='radio']):not([type='checkbox']):not([type='image']):not([type='file']) {
+                width: 100%;
+                max-width: 180px;
+                margin: auto;
+				line-height: 1;
+            }
+        }
+		.gform_footer:not(.top_label) {
+			width: 100%;
+			margin-left: 0;
+		    margin-top: 50px;
+		}
+
+		ul.gform_fields:not(.top_label) li ul.gfield_checkbox,
+		ul.gform_fields:not(.top_label) li ul.gfield_radio {
+			width: 100%;
+		}
+
+	}
+
+
+	.gform_wrapper .gfield_radio li label {
+		margin: 0 0 0 10px;
+	}
+
+	.gform_wrapper ul.gform_fields.right_label li.gfield,
+	.gform_wrapper form ul.gform_fields.right_label li.gfield,
+	.gform_wrapper ul.gform_fields.left_label li.gfield,
+	.gform_wrapper form ul.gform_fields.left_label li.gfield,
+	.gform_wrapper ul li.gfield {
+	    margin-bottom: 40px;
+	}
+	.gform_wrapper span.name_last {
+		padding-right: 0;
+	}
+	.gform_wrapper .field_sublabel_hidden_label .ginput_complex.ginput_container input[type=text],
+	.gform_wrapper .field_sublabel_hidden_label .ginput_complex.ginput_container select {
+		margin-bottom: 0;
+	}
+	// Option to hide form LABELS
+	.gform_wrapper .hidden_label .gfield_label,
+	.gform_wrapper label.hidden_sub_label,
+	.gform_wrapper label.screen-reader-text {
+	    clip: rect(1px, 1px, 1px, 1px);
+	    position: absolute!important;
+	    height: 1px;
+	    width: 1px;
+	    overflow: hidden
+	}
+
+	.gform_wrapper li.hidden_label input {
+	    margin-top: 12px
+	}
+
+	.gform_wrapper .left_label li.hidden_label input,
+	.gform_wrapper .right_label li.hidden_label input {
+	    margin-left: 3.7%
+	}
+
+	.gform_wrapper .hidden_label input.large,
+	.gform_wrapper .hidden_label select.large,
+	.gform_wrapper .top_label input.large,
+	.gform_wrapper .top_label select.large {
+	    width: 100%
+	}
+}
+
+// Style the left aligned labels
+html:not([dir="rtl"]) .gform_wrapper #gform_2 ul.gform_fields:not(.top_label) .ginput_container:not(.ginput_container_time):not(.ginput_container_date),
+html:not([dir="rtl"]) .gform_wrapper #gform_2 ul.gform_fields:not(.top_label) .clear-multi,
+html:not([dir="rtl"]) .gform_wrapper #gform_2 ul.gform_fields:not(.top_label) .gfield_description {
+	margin-left: 75px;
+	width: calc(100% - 75px);
+}
+
+.gform_wrapper.two-column_wrapper ul.gform_fields,
+.gform_wrapper.two-column_wrapper ul.gform_column li.gsection:first-child {
+	display: none;
+}
+
+.gform_wrapper.two-column_wrapper ul.gform_fields.gform_column {
+	display: block;
+}
+
+.gform_wrapper.two-column_wrapper ul.one-half {
+	margin-left: 6% !important;
+	width: 56%;
+	float: left;
+}
+.gform_wrapper.two-column_wrapper ul.one-half.first {
+	@media screen and ($tablet) {
+		margin-left: 0 !important;
+		width: 38%;
+	}
+	li.gfield {
+		margin-bottom: 10px;
+		@media screen and ($tablet) {
+			margin-bottom: 40px;
+		}
+	}
+	.gfield_label {
+		margin-bottom: 5px;
+	}
+	.ginput_container_radio {
+		margin-left: 60px;
+		@media screen and ($tablet) {
+			margin-left: 0;
+		}
+	}
+}
+.gform_wrapper.two-column_wrapper ul.one-half:last-child {
+	@media screen and ($tablet) {
+		position: absolute;
+		top: 0;
+		right: 0;
+		#field_2_2 {
+			margin-top: 0;
+		}
+	}
+}
+#input_3_2,
+#input_3_3,
+#input_3_4 {
+	width: 100%;
+}
+
+.gform_wrapper .gsection {
+	border-bottom: none !important;
+}
+
+.gform_wrapper .top_label li.gfield.gf_right_half+li.gsection {
+	padding: 0 !important;
+}
+
+@media only screen and (max-width: 767px) {
+
+	.gform_wrapper.two-column_wrapper ul.one-half {
+		width: 100%;
+	}
+
+	.gform_wrapper.two-column_wrapper ul.one-half {
+		margin-left: 0 !important;
+	}
+
+	.gform_wrapper .gsection {
+		display: none !important; /* remove !important if it's not needed */
+	}
+
+	#gform_wrapper_3 li {
+		margin-bottom: 10px;
+	}
+
+	.gform_wrapper .gform_footer:not(.top_label) {
+		margin-left: 0;
+		width: 100%;
+	}
+
+}

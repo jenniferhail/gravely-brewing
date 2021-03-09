@@ -1,0 +1,111 @@
+html {
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-size: 100%;
+  font-weight: $base-font-weight;
+  line-height: $base-line-height;
+}
+.small-ass-heading,
+.medium-ass-heading,
+.large-ass-heading {
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+	text-decoration: none;
+	color: $dark-blue;
+}
+.small-ass-heading {
+    font-size: 1.3em;
+	// @media screen and ($mobile-sm) {
+	// 	font-size: ;
+	// }
+	@media screen and ($tablet) {
+		font-size: 1.8em;
+		margin-bottom: 0.75rem;
+	}
+}
+.medium-ass-heading {
+	font-size: 1.95em;
+	@media screen and ($mobile-sm) {
+		font-size: 2.5rem;
+	}
+	@media screen and ($tablet) {
+		font-size: 2.15rem;
+	}
+	@media screen and ($sm-laptop) {
+		font-size: 2.75rem;
+	}
+	@media screen and ($laptop) {
+		font-size: 3.25rem;
+	}
+	@media screen and ($desktop) {
+		font-size: 4rem;
+	}
+}
+.large-ass-heading {
+    font-size: 3.5rem;
+	@media screen and ($mobile-sm) {
+		font-size: 6rem;
+	}
+	@media screen and ($tablet) {
+		font-size: 9rem;
+	}
+}
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: $heading-font-family;
+  font-size: modular-scale(1);
+  font-weight: $heading-font-weight;
+  line-height: $heading-line-height;
+  margin: 0 0 0.25rem;
+  color: $black;
+}
+h1, .h1 {
+	font-size: 1.74rem;
+	@media screen and ($mobile-sm) {
+		font-size: 2.074rem;
+	}
+}
+h2, .h2 {
+	font-size: 1.728rem;
+}
+h3, .h3 {
+	font-size: 1.44rem;
+}
+h4, .h4 {
+	font-size: 1.2rem;
+}
+h5, .h5 {
+	font-size: 1rem;
+}
+h6, .h6 {
+	font-size: 0.833rem;
+}
+p {
+  margin: 0 0 $small-spacing;
+}
+a {
+  color: $black;
+  text-decoration: none;
+  text-decoration-skip: ink;
+  transition: all $base-duration $base-timing;
+  &:hover {
+    // color: shade($action-color, 25%);
+    color: $action-color;
+  }
+  &:focus {
+    outline: none;
+    // outline: $focus-outline;
+    outline-offset: $focus-outline-offset;
+  }
+}
+hr {
+  border-bottom: $base-border;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  margin: $base-spacing 0;
+}

@@ -1,0 +1,991 @@
+.layout.listing {
+	.intro {
+		text-align: center;
+		margin-bottom: 60px;
+	}
+	.list-items {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+	.filter.active {
+		position: relative;
+		display: inline-block;
+		margin-bottom: 50px;
+		padding: 0;
+		text-align: center;
+		@media screen and ($tablet) {
+			margin-bottom: 0;
+			padding-right: 60px;
+			text-align: left;
+		}
+		.list-filter li a,
+		.filter-toggle {
+			font-weight: 700;
+			font-family: $heading-font-family;
+			letter-spacing: 0.02em;
+			white-space: nowrap;
+		}
+		a.active {
+			color: $orange;
+		}
+		.filter-toggle {
+			cursor: pointer;
+			color: $orange;
+			@media screen and ($tablet) {
+				display: none;
+			}
+			.arrow-icon {
+				position: relative;
+				display: inline-block;
+				width: 19px;
+				height: 19px;
+				margin: 0 6px;
+				span {
+					display: inline-block;
+					position: absolute;
+					top: 0.8rem;
+					width: 0.75rem;
+					height: 3px;
+					border-radius: 10px;
+					background-color: $orange;
+					transition: all 400ms cubic-bezier(.25,1.7,.35,.8);
+					&.left-bar {
+						left: 0;
+						transform: rotate(40deg);
+						// border-radius: 3px 6px 6px 3px;
+					}
+					&.right-bar {
+						right: 0;
+						transform: rotate(-40deg);
+						// border-radius: 6px 3px 3px 6px;
+					}
+				}
+			}
+		}
+		&.visible .filter-toggle .arrow-icon span {
+			&.left-bar {
+				transform: rotate(-40deg);
+			}
+			&.right-bar {
+				transform: rotate(40deg);
+			}
+		}
+		.menu {
+			display: block;
+			@media screen and (max-width: 767px) {
+				display: none;
+				position: absolute;
+				top: 32px;
+				left: 50%;
+				padding: 5px 10px 5px;
+				line-height: 32px;
+				background-color: $white;
+				border: 1px solid $light-gray;
+				border-radius: 5px;
+				box-shadow: 0 2px 3px 0 rgba(34,36,38,0.15);
+				z-index: 10;
+				&.transition {
+					display: block;
+					opacity: 0;
+					transform: translateX(-50%) scaleY(0);
+					transition: transform 200ms ease,
+								opacity 200ms ease;
+					&.in {
+						animation-name: slideInY;
+						transform-origin: top center;
+						opacity: 1;
+						transform: translateX(-50%) scaleY(1);
+					}
+					&.out {
+						animation-name: slideOutY;
+						transform-origin: top center;
+						opacity: 0;
+						transform: translateX(-50%) scaleY(0);
+					}
+				}
+			}
+		}
+	}
+
+	// Align the filters list to the left of content
+	.content {
+		text-align: center;
+		@media screen and ($tablet) {
+			width: 100%;
+			display: flex;
+			text-align: left;
+		}
+	}
+	.filtered-list,
+	.slider-list {
+		position: relative;
+		flex: 1 0 auto;
+	}
+	.slider-list {
+		width: 100%;
+		@media screen and ($tablet) {
+			width: calc(100% - 167px);
+		}
+	}
+
+	.beer {
+		position: relative;
+	    overflow: hidden;
+		text-align: left;
+		@media screen and (min-width: 769px) {
+			margin-bottom: 50px;
+			padding: 0 30px 0 0;
+		}
+		.title,
+		span {
+			margin-bottom: 15px;
+		}
+		.type,
+		.abv,
+		.ibu {
+			display: inline-block;
+			padding-right: 15px;
+			&:last-child {
+				padding-right: 0;
+			}
+		}
+		.sell-sheet-link,
+		.song-toggle {
+			display: flex;
+			align-items: center;
+		}
+		.sell-sheet {
+			padding-top: 10px;
+		}
+		svg.small-glass {
+			margin-right: 18px;
+			width: 18px;
+			height: 29px;
+		}
+		svg.play-btn {
+			width: 24px;
+			height: 24px;
+			flex: 0 0 auto;
+			position: relative;
+			left: -2px;
+			margin-right: 12px;
+		}
+		.song-toggle {
+			line-height: 1.25;
+		}
+		.song-details {
+			position: relative;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			background-color: $white;
+		}
+		.spotify-embed {
+			background-color: $white;
+			.spotify-embed-inner {
+				position: relative;
+			    transition: transform 300ms ease-out 100ms;
+				background-color: $white;
+			}
+			.song-player {
+				position: absolute;
+				width: 100%;
+				background-color: $white;
+				iframe {
+					display: block;
+					height: 80px;
+					width: 100%;
+					max-width: 300px;
+				}
+			}
+			&.active {
+				transition: transform 300ms ease-out 100ms;
+				.spotify-embed-inner {
+					transform: translate3d(0,-80px,0);
+				}
+			}
+		}
+	}
+	// Remove bottom margin on grid bottom
+	.slick-slide div:nth-child(3) .beer,
+	.slick-slide div:last-child .beer {
+		@media screen and (min-width: 769px) {
+		    margin-bottom: 0;
+		}
+	}
+
+	.beer-list {
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		margin-right: 30px;
+		transition: transform 900ms ease-in-out;
+		@media screen and ($mobile-sm) {
+			margin-right: 80px;
+		}
+		&.active {
+			display: flex;
+		}
+		&.not-active {
+			display: none;
+		}
+		&.expanded {
+
+		}
+		.item {
+			width: 100%;
+			text-align: left;
+			@media screen and ($tablet) {
+				width: 25%;
+				padding: 20px;
+			}
+			p {
+				margin-bottom: 0;
+			}
+		}
+		.badge {
+			margin-top: 10px;
+			width: 60px;
+			height: 60px;
+			padding: 0;
+			@media screen and (max-width: 680px) {
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+		&.slick-initialized {
+			.slick-next,
+			.slick-prev {
+				.fas {
+					display: block;
+					margin-bottom: 15px;
+					font-size: 30px;
+					color: $black;
+				}
+				&:before {
+					display: none;
+					font-size: 0;
+				}
+			}
+			.slick-next {
+				width: 50px;
+				height: 100%;
+				padding: 0;
+				right: -50px;
+				z-index: 999;
+				font-size: 0;
+				font-weight: 300;
+				font-family: $base-font-family;
+				-webkit-font-smoothing: auto;
+				text-align: center;
+				text-transform: none;
+				background-color: transparent;
+				border: 0;
+				color: $medium-gray;
+				@media screen and ($mobile-sm) {
+					width: 80px;
+					right: -90px;
+					font-size: 16px;
+				}
+			}
+			.slick-prev {
+				display: none;
+				font-size: 0;
+			}
+			.slick-slide {
+				display: flex;
+				flex-wrap: wrap;
+				// padding: 20px;
+				@media screen and (max-width: 680px) {
+					text-align: center;
+				}
+				div:not(.spotify-embed) {
+					// padding: 10px;
+					@media screen and ($tablet) {
+						flex-basis: 50%;
+					}
+				}
+				.copy {
+					flex-basis: 100%;
+					padding: 0;
+					&:first-of-type {
+						margin-bottom: 0;
+					}
+				}
+				.badge {
+					width: 100px;
+					height: 100px;
+					margin-top: -10px;
+				}
+				.item {
+					padding: 0;
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	.event-item {
+		padding: 50px 0;
+		border-bottom: $base-border;
+		text-align: center;
+		@media screen and ($tablet) {
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: space-between;
+			align-items: center;
+			padding: 30px 0;
+			text-align: left;
+		}
+		&:first-child {
+			border-top: $base-border;
+		}
+		.col {
+			padding: 0 0 15px;
+			&:last-child {
+				padding: 0;
+			}
+			@media screen and ($tablet) {
+				padding: 0 15px;
+				&:first-child {
+					padding: 0 15px 0 0;
+				}
+				&:last-child {
+					padding: 0 0 0 15px;
+				}
+			}
+		}
+		.col-img {
+			flex: 0 0 auto;
+			min-width: 100px;
+			@media screen and ($tablet) {
+				max-width: 100px;
+				height: 100px;
+				overflow: hidden;
+			}
+			img {
+				display: block;
+				max-width: 300px;
+				margin: auto;
+				@media screen and ($tablet) {
+					position: relative;
+					top: 50%;
+					transform: translateY(-50%);
+					max-width: 100px;
+					margin: 0;
+				}
+			}
+		}
+		.col:nth-child(2) {
+			@media screen and ($tablet) {
+				flex: 0 1 auto;
+				width: 30%;
+			}
+		}
+		.col-details {
+			max-width: 300px;
+			margin: auto;
+			padding-bottom: 20px;
+			@media screen and ($tablet) {
+				flex: 0 1 auto;
+				margin: 0;
+				padding-bottom: 0;
+			}
+		}
+		.item-title {
+			font-size: 1.1em;
+			margin-bottom: 5px;
+			@media screen and ($sm-laptop) {
+				font-size: 1.3em;
+			}
+			@media screen and ($tablet) {
+				font-size: 1.5em;
+			}
+		}
+		.item-description {
+			margin-bottom: 10px;
+			@media screen and ($tablet) {
+				margin-bottom: 0;
+			}
+		}
+		.item-date,
+		.item-details {
+			color: $orange;
+		}
+		.item-date {
+			margin-bottom: 0;
+			font-size: 18px;
+			line-height: 24px;
+		}
+		.item-details {
+			margin-left: 5px;
+			margin-bottom: 0;
+			letter-spacing: 0.25px;
+			text-transform: uppercase;
+			border-bottom: 1px solid;
+		}
+		.item-description {
+			line-height: 26px;
+		}
+		.buttons {
+			padding-top: 0;
+			.btn {
+				min-width: 180px;
+				margin: auto;
+				@media screen and ($tablet) {
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	.slide-list {
+		position: relative;
+		.slider__arrows {
+			position: absolute;
+			top: 0;
+			right: -90px;
+			// width: 60px;
+			// height: 100%;
+			button {
+				max-width: none;
+				height: 100%;
+				width: 80px;
+				padding: 0;
+				border: 0;
+				&.glide__arrow--right {
+					right: 0;
+				}
+				&:hover {
+					background-color: transparent;
+				}
+			}
+		}
+	}
+	.beer-cave {
+		display: none;
+		visibility: hidden;
+		width: 0;
+		height: 0;
+		font-size: 0;
+	}
+}
+
+.layout.listing.filter_on_tap {
+	.intro {
+		min-width: 278px;
+		max-width: 1520px;
+	    margin: auto;
+		padding-left: $site-padding / 2;
+	    padding-right: $site-padding / 2;
+		@media screen and (min-width: 868px) {
+			padding-left: 0;
+			padding-right: 0;
+			text-align: left;
+		}
+		.title {
+		    max-width: 270px;
+			margin-left: auto;
+			margin-right: auto;
+			font-size: 1.85rem;
+			@media screen and (min-width: 868px) {
+				margin-left: 0;
+				margin-right: 0;
+			}
+			@media screen and ($sm-laptop) {
+				max-width: 340px;
+				font-size: 2.074rem;
+			}
+		}
+	}
+	// Align the three divs for mobile and desktop
+	.content {
+		display: block;
+		text-align: center;
+		@media screen and (min-width: 868px) {
+			display: flex;
+			flex-wrap: nowrap;
+			align-items: center;
+			justify-content: space-between;
+			text-align: left;
+		}
+	}
+	.flex-wrap {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		text-align: center;
+		@media screen and (min-width: 868px) {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			text-align: left;
+		}
+	}
+	.content-wrap {
+		display: block;
+		@media screen and (min-width: 868px) {
+			position: relative;
+			// flex: 0 1 auto;
+		    flex: 1 0 auto;
+		    align-self: stretch;
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+	.filter.active {
+		position: relative;
+		display: inline-block;
+		margin-bottom: 50px;
+		padding: 0;
+		text-align: center;
+		@media screen and (min-width: 868px) {
+			margin-bottom: 0;
+			padding-right: 60px;
+			text-align: left;
+		}
+		.list-filter li a,
+		.filter-toggle {
+			font-weight: 700;
+			font-family: $heading-font-family;
+			letter-spacing: 0.02em;
+			white-space: nowrap;
+		}
+		a.active {
+			color: $orange;
+		}
+		.filter-toggle {
+			display: block;
+			cursor: pointer;
+			color: $orange;
+			@media screen and (min-width: 868px) {
+				display: none;
+			}
+			.arrow-icon {
+				position: relative;
+				display: inline-block;
+				width: 19px;
+				height: 19px;
+				margin: 0 6px;
+				span {
+					display: inline-block;
+					position: absolute;
+					top: 0.8rem;
+					width: 0.75rem;
+					height: 3px;
+					border-radius: 10px;
+					background-color: $orange;
+					transition: all 400ms cubic-bezier(.25,1.7,.35,.8);
+					&.left-bar {
+						left: 0;
+						transform: rotate(40deg);
+						// border-radius: 3px 6px 6px 3px;
+					}
+					&.right-bar {
+						right: 0;
+						transform: rotate(-40deg);
+						// border-radius: 6px 3px 3px 6px;
+					}
+				}
+			}
+		}
+		&.visible .filter-toggle .arrow-icon span {
+			&.left-bar {
+				transform: rotate(-40deg);
+			}
+			&.right-bar {
+				transform: rotate(40deg);
+			}
+		}
+		.menu {
+			display: block;
+			@media screen and (max-width: 867px) {
+				display: none;
+				position: absolute;
+				top: 32px;
+				left: 50%;
+				padding: 5px 10px 5px;
+				line-height: 32px;
+				background-color: $white;
+				border: 1px solid $light-gray;
+				border-radius: 5px;
+				box-shadow: 0 2px 3px 0 rgba(34,36,38,0.15);
+				z-index: 10;
+				&.transition {
+					display: block;
+					opacity: 0;
+					transform: translateX(-50%) scaleY(0);
+					transition: transform 200ms ease,
+								opacity 200ms ease;
+					&.in {
+						animation-name: slideInY;
+						transform-origin: top center;
+						opacity: 1;
+						transform: translateX(-50%) scaleY(1);
+					}
+					&.out {
+						animation-name: slideOutY;
+						transform-origin: top center;
+						opacity: 0;
+						transform: translateX(-50%) scaleY(0);
+					}
+				}
+			}
+		}
+	}
+
+	.filter-wrap {
+		position: relative;
+	}
+	.filter.active {
+		padding-right: 0;
+		// order: 1;
+	}
+	.filtered-list {
+		// order: 3;
+		width: 100%;
+		min-height: 250px;
+		margin: 0 auto;
+		@media screen and (min-width: 868px) {
+			flex: 0 1 auto;
+			margin: 0 0 0 30px;
+			max-width: 360px;
+		}
+		// @media screen and ($tablet) {
+		//
+		// }
+		@media screen and ($sm-laptop) {
+			margin: 0 0 0 60px;
+		}
+		.item {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			@media screen and (min-width: 868px) {
+				width: auto;
+			}
+		}
+	}
+	.beer {
+		max-width: 480px;
+		margin: 0 auto;
+		padding: 0;
+		text-align: center;
+		@media screen and (min-width: 868px) {
+			max-width: none;
+			margin: 0;
+			text-align: left;
+		}
+	}
+	.beer-glasses {
+		position: relative;
+		// order: 2;
+		width: 220px;
+		margin: 0 auto 30px;
+		@media screen and (min-width: 868px) {
+			margin: 0;
+		}
+	}
+	.tap-wrapper {
+		position: relative;
+		margin-bottom: 0;
+		text-align: center;
+		perspective: 1000px;
+		-webkit-perspective: 1000px;
+		transform-style: preserve-3d;
+		z-index: 1;
+		@media screen and (max-width: 867px) {
+			display: none;
+		}
+		svg.handle {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			height: 140px;
+			transition: all 500ms ease 300ms;
+			transform: rotateX(0deg) translateX(-50%);
+			transform-origin: center bottom;
+			z-index: 10;
+		}
+		svg.tap {
+			height: 208px;
+			margin-bottom: -15px;
+			transform: translateZ(-40px);
+		}
+	}
+	.glass {
+		@media screen and (min-width: 868px) {
+			padding-top: 40px;
+		}
+		svg {
+			display: block;
+			overflow: visible;
+			width: 220px;
+			height: 233px;
+		}
+		.mask {
+			fill: #FFFFFF;
+		}
+		.bubble {
+			opacity: 0.25;
+			fill: #FFFFFF;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+		}
+		.bubble1 {
+			animation-delay: 1000ms;
+			animation-duration: 1500ms;
+		}
+		.bubble2 {
+			animation-delay: 700ms;
+			animation-duration: 1600ms;
+		}
+		.bubble3 {
+			animation-delay: 1200ms;
+			animation-duration: 1800ms;
+		}
+		.bubble4 {
+			animation-delay: 1100ms;
+			animation-duration: 1200ms;
+		}
+		.bubble5 {
+			animation-delay: 1300ms;
+			animation-duration: 1300ms;
+		}
+		.bubble6 {
+			animation-delay: 1100ms;
+			animation-duration: 1500ms;
+		}
+		.beerFill {
+			transition: transform 250ms ease 300ms;
+		}
+
+	}
+}
+
+// Hide the beer tap on IE 10, 11, & Edge
+html.no-smil {
+	.tap-wrapper {
+		display: none;
+	}
+}
+// Animate the beer tap on browsers except for IE 10, 11, & Edge
+html.smil {
+	.layout.listing.filter_on_tap {
+		.tap-wrapper.pouring svg.handle {
+			transform: rotateX(-30deg) translateX(-50%);
+		}
+	}
+	.glass {
+		&.pilsner {
+			.pour {
+				fill: #F9B53D;
+				transform: translateY(-564px) translateX(1px);
+			}
+			.bubble {
+				animation-name: bubblePilsner;
+			}
+			.beerFill {
+				fill: #F9B53D;
+				transform: translate3d(0,378px,0);
+			}
+			&.slick-active .beerFill {
+				transform: translate3d(0,0,0);
+				transition: transform 2500ms ease 300ms;
+			}
+			&.reset-animation .beerFill {
+				transform: translate3d(0,378px,0);
+			}
+			// Used to transition when the selected beer glass is the same type as the new glass
+			&.slick-active.fade {
+				.beerFill {
+					animation: fadePilsner 2500ms;
+				}
+			}
+			@media screen and (min-width: 868px) {
+				&.slick-active .pour {
+					animation-name: pourPilsner;
+					animation-duration: 2850ms;
+					animation-delay: 750ms;
+					animation-timing-function: linear;
+					animation-fill-mode: forwards;
+				}
+				&.slick-active .beerFill {
+					transform: translate3d(0,0,0);
+					transition: transform 2500ms ease 1750ms;
+				}
+			}
+
+		}
+		&.pint {
+			.pour {
+				fill: #F9B53D;
+				transform: translateY(-610px) translateX(1px);
+			}
+			.bubble {
+				animation-name: bubblePint;
+			}
+			.beerFill {
+				fill: #F9B53D;
+				transform: translate3d(0,422px,0);
+			}
+			&.slick-active .beerFill {
+				transform: translate3d(0,0,0);
+				transition: transform 2750ms ease 300ms;
+			}
+			// Used to transition when the selected beer glass is the same type as the new glass
+			&.slick-active.fade {
+				.beerFill {
+					animation: fadePint 2750ms;
+				}
+			}
+			@media screen and (min-width: 868px) {
+				&.slick-active .beerFill {
+					transform: translate3d(0,0,0);
+					transition: transform 2750ms ease 1900ms;
+				}
+				&.slick-active .pour {
+					animation-name: pourPint;
+					animation-duration: 2700ms;
+					animation-delay: 750ms;
+					animation-timing-function: linear;
+					animation-fill-mode: forwards;
+				}
+			}
+
+		}
+		&.sprocket {
+			.pour {
+				fill: #CC6C2B;
+				transform: translateY(-530px) translateX(1px);
+			}
+			.bubble {
+				animation-name: bubbleSprocket;
+			}
+			.beerFill {
+				fill: #CC6C2B;
+				transform: translate3d(0,347px,0);
+			}
+			&.slick-active .beerFill {
+				transform: translate3d(0,0,0);
+				transition: transform 3250ms ease 300ms;
+			}
+			// Used to transition when the selected beer glass is the same type as the new glass
+			&.slick-active.fade {
+				.beerFill {
+					animation: fadeSprocket 3250ms;
+				}
+			}
+			@media screen and (min-width: 868px) {
+				&.slick-active .pour {
+					animation-name: pourSprocket;
+					animation-duration: 2450ms;
+					animation-delay: 750ms;
+					animation-timing-function: linear;
+					animation-fill-mode: forwards;
+				}
+				&.slick-active .beerFill {
+					transform: translate3d(0,0,0);
+					transition: transform 3250ms ease 1500ms;
+				}
+			}
+
+		}
+		&.tulip {
+			.pour {
+				fill: #CC6C2B;
+				transform: translateY(-504px) translateX(1px);
+			}
+			.bubble {
+				animation-name: bubbleTulip;
+			}
+			.beerFill {
+				fill: #CC6C2B;
+				transform: translate3d(0,315px,0);
+			}
+			&.slick-active .beerFill {
+				transform: translate3d(0,0,0);
+				transition: transform 2750ms ease 300ms;
+			}
+			// Used to transition when the selected beer glass is the same type as the new glass
+			&.slick-active.fade {
+				.beerFill {
+					animation: fadeTulip 2750ms;
+				}
+			}
+			@media screen and (min-width: 868px) {
+				&.slick-active .pour {
+					animation-name: pourTulip;
+					animation-duration: 2450ms;
+					animation-delay: 750ms;
+					animation-timing-function: linear;
+					animation-fill-mode: forwards;
+				}
+				&.slick-active .beerFill {
+					transform: translate3d(0,0,0);
+					transition: transform 3300ms ease 1750ms;
+				}
+			}
+
+		}
+		&.la-bamba {
+			.pour {
+				fill: #E0D375;
+				transform: translateY(-610px) translateX(1px);
+			}
+			.bubble {
+				animation-name: bubbleLaBamba;
+			}
+			.beerFill {
+				fill: #E0D375;
+				transform: translate3d(0,422px,0);
+			}
+			&.slick-active .beerFill {
+				transform: translate3d(0,0,0);
+				transition: transform 2750ms ease 300ms;
+			}
+			// Used to transition when the selected beer glass is the same type as the new glass
+			&.slick-active.fade {
+				.beerFill {
+					animation: fadeLaBamba 2750ms;
+				}
+			}
+			@media screen and (min-width: 868px) {
+				&.slick-active .pour {
+					animation-name: pourLaBamba;
+					animation-duration: 2450ms;
+					animation-delay: 750ms;
+					animation-timing-function: linear;
+					animation-fill-mode: forwards;
+				}
+				&.slick-active .beerFill {
+					transform: translate3d(0,0,0);
+					transition: transform 2750ms ease 1800ms;
+				}
+			}
+
+		}
+	}
+}
+
+html.no-smil {
+	.layout.listing.filter_on_tap .glass {
+		.bubble,
+		.pour {
+			opacity: 0;
+		}
+	}
+}
+
+.layout.listing.event-listing {
+	.content {
+		display: block;
+	}
+	.layout-button {
+		.btn {
+			margin: 30px auto 0;
+		}
+	}
+}
